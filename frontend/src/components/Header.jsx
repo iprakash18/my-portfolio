@@ -24,8 +24,7 @@ const Header = () => {
     { name: 'About', path: '/#about' },
     { name: 'Skills', path: '/#skills' },
     { name: 'Experience', path: '/#experience' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Contact', path: '/#contact' }
+    { name: 'Blog', path: '/blog' }
   ];
 
   const scrollToSection = (hash) => {
