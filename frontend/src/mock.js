@@ -233,7 +233,7 @@ networks:
 
 <p><em>Originally published on <a href="https://medium.com/@iprakash18/elasticsearch-and-kibana-environment-using-docker-compose-58f6d0d4c57f" target="_blank">Medium</a>.</em></p>`,
     author: "Prakash Iyyanarappan",
-    publishedDate: "2019-03-11",
+    publishedDate: "2025-12-01",
     readTime: 2,
     tags: ["Docker", "Elasticsearch", "Kibana", "ELK", "Docker Compose"],
     category: "DevOps",
