@@ -10,7 +10,7 @@ export const profileData = {
   github: "https://github.com/iprakash18",
   instagram: "https://www.instagram.com/prakashiyyanarappan/",
   medium: "https://medium.com/@iprakash18",
-  resumeUrl: "https://customer-assets.emergentagent.com/job_pro-journal-1/artifacts/w3lwk476_Prakash_Iyyanarappan_DevOps.pdf",
+  resumeUrl: "/Prakash_Iyyanarappan_DevOps.pdf",
   profileImage: "/profile_new.jpeg",
   summary: "Highly skilled Associate Architect with around 13+ years of expertise in DevOps, specializing in Cloud Infrastructure, CI/CD pipelines, and automation. Proficient in optimizing system performance, enabling seamless deployments, and driving operational efficiency across diverse environments. Strong focus on scalability, reliability, and continuous improvement."
 };
