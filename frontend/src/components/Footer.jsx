@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, Instagram, Mail, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Instagram, ExternalLink } from 'lucide-react';
 import { profileData } from '../mock';
 
 const Footer = () => {
@@ -37,11 +37,6 @@ const Footer = () => {
               <li>
                 <Link to="/blog" className="text-muted-foreground hover:text-cyan-500 transition-colors text-sm" data-testid="footer-blog-link">
                   Blog
-                </Link>
-              </li>
-              <li>
-                <Link to="/admin" className="text-muted-foreground hover:text-cyan-500 transition-colors text-sm" data-testid="footer-admin-link">
-                  Admin
                 </Link>
               </li>
             </ul>
@@ -94,14 +89,6 @@ const Footer = () => {
                 <ExternalLink className="h-4 w-4" />
                 <span>Medium</span>
                 <ExternalLink className="h-3 w-3" />
-              </a>
-              <a
-                href={`mailto:${profileData.email}`}
-                data-testid="footer-email-link"
-                className="flex items-center space-x-2 text-muted-foreground hover:text-cyan-500 transition-colors text-sm"
-              >
-                <Mail className="h-4 w-4" />
-                <span>Email</span>
               </a>
             </div>
           </div>
