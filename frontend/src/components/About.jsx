@@ -43,13 +43,13 @@ const About = () => {
                   <CardContent className="p-8">
                     <div className="space-y-6">
                       <div className="flex flex-col items-center text-center space-y-4">
-                        <div className="relative">
-                          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full blur-md opacity-50"></div>
+                        <div className="relative group cursor-zoom-in overflow-hidden rounded-full h-56 w-56">
+                          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full blur-md opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
                           <img
                             src={profileData.profileImage}
                             alt={profileData.name}
                             data-testid="profile-image"
-                            className="relative h-40 w-40 rounded-full object-cover border-4 border-cyan-500/50 shadow-xl shadow-cyan-500/20"
+                            className="relative h-56 w-56 rounded-full object-cover border-4 border-cyan-500/50 shadow-xl shadow-cyan-500/20 transform transition-transform duration-500 ease-out group-hover:scale-125"
                           />
                         </div>
                         <div>
