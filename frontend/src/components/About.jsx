@@ -23,15 +23,15 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 lg:py-28">
+    <section id="about" className="pt-8 pb-20 lg:pb-28">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              About <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Me</span>
+              About <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">Me</span>
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full"></div>
+            <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-600 mx-auto rounded-full"></div>
           </div>
 
           {/* Content Grid */}
@@ -39,30 +39,30 @@ const About = () => {
             {/* Left Column - Image/Visual */}
             <div className="relative">
               <div className="relative z-10">
-                <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700 backdrop-blur">
+                <Card className="bg-card border-border backdrop-blur">
                   <CardContent className="p-8">
                     <div className="space-y-6">
                       <div className="flex items-center space-x-4">
-                        <div className="h-16 w-16 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center text-2xl font-bold text-white">
+                        <div className="h-16 w-16 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 flex items-center justify-center text-2xl font-bold text-white">
                           {profileData.name.split(' ').map(n => n[0]).join('')}
                         </div>
                         <div>
-                          <h3 className="text-xl font-bold text-white">{profileData.name}</h3>
-                          <p className="text-cyan-400">{profileData.title}</p>
+                          <h3 className="text-xl font-bold text-foreground">{profileData.name}</h3>
+                          <p className="text-cyan-600 dark:text-cyan-400">{profileData.title}</p>
                         </div>
                       </div>
-                      <div className="h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
-                      <div className="space-y-3 text-slate-300">
+                      <div className="h-px bg-border"></div>
+                      <div className="space-y-3 text-muted-foreground">
                         <p className="flex items-center space-x-2">
-                          <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
+                          <span className="w-2 h-2 rounded-full bg-cyan-500"></span>
                           <span>{profileData.location}</span>
                         </p>
                         <p className="flex items-center space-x-2">
-                          <span className="w-2 h-2 rounded-full bg-blue-400"></span>
+                          <span className="w-2 h-2 rounded-full bg-blue-500"></span>
                           <span>{education.degree} in {education.field}</span>
                         </p>
                         <p className="flex items-center space-x-2">
-                          <span className="w-2 h-2 rounded-full bg-purple-400"></span>
+                          <span className="w-2 h-2 rounded-full bg-purple-500"></span>
                           <span>{education.institution}</span>
                         </p>
                       </div>
@@ -100,13 +100,14 @@ const About = () => {
               return (
                 <Card
                   key={index}
-                  className="bg-slate-800/30 border-slate-700 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 group"
+                  data-testid={`highlight-card-${index}`}
+                  className="bg-card border-border hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 group"
                 >
                   <CardContent className="p-6 text-center">
                     <div className="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 group-hover:from-cyan-500/30 group-hover:to-blue-500/30 transition-all">
-                      <Icon className="h-8 w-8 text-cyan-400" />
+                      <Icon className="h-8 w-8 text-cyan-500" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{highlight.title}</h3>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">{highlight.title}</h3>
                     <p className="text-muted-foreground">{highlight.description}</p>
                   </CardContent>
                 </Card>

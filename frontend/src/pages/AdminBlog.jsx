@@ -128,14 +128,15 @@ const AdminBlog = () => {
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-3xl md:text-4xl font-bold mb-2">
-                Blog <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Admin</span>
+                Blog <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">Admin</span>
               </h1>
               <p className="text-muted-foreground">Manage your blog posts (Frontend Mock)</p>
             </div>
             {!isEditing && (
               <Button
                 onClick={handleCreate}
-                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700"
+                data-testid="new-post-btn"
+                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white"
               >
                 <Plus className="mr-2 h-4 w-4" />
                 New Post
@@ -145,7 +146,7 @@ const AdminBlog = () => {
 
           {isEditing ? (
             /* Editor Form */
-            <Card className="bg-slate-800/40 border-slate-700">
+            <Card className="bg-card border-border">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   <span>{currentPost ? 'Edit Post' : 'Create New Post'}</span>
@@ -157,30 +158,30 @@ const AdminBlog = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Title *</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">Title *</label>
                   <Input
                     name="title"
                     value={formData.title}
                     onChange={handleChange}
                     placeholder="Post title"
-                    className="bg-slate-900/50 border-slate-600 focus:border-cyan-500 text-white"
+                    className="bg-background border-input focus:border-cyan-500 text-foreground"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Excerpt *</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">Excerpt *</label>
                   <Textarea
                     name="excerpt"
                     value={formData.excerpt}
                     onChange={handleChange}
                     placeholder="Brief description"
                     rows={3}
-                    className="bg-slate-900/50 border-slate-600 focus:border-cyan-500 text-white"
+                    className="bg-background border-input focus:border-cyan-500 text-foreground"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Content * (HTML supported)</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">Content * (HTML supported)</label>
                   <Textarea
                     name="content"
                     value={formData.content}
@@ -193,35 +194,35 @@ const AdminBlog = () => {
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">Category</label>
+                    <label className="block text-sm font-medium text-foreground mb-2">Category</label>
                     <Input
                       name="category"
                       value={formData.category}
                       onChange={handleChange}
                       placeholder="e.g., DevOps, Cloud"
-                      className="bg-slate-900/50 border-slate-600 focus:border-cyan-500 text-white"
+                      className="bg-background border-input focus:border-cyan-500 text-foreground"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">Read Time (minutes)</label>
+                    <label className="block text-sm font-medium text-foreground mb-2">Read Time (minutes)</label>
                     <Input
                       name="readTime"
                       type="number"
                       value={formData.readTime}
                       onChange={handleChange}
-                      className="bg-slate-900/50 border-slate-600 focus:border-cyan-500 text-white"
+                      className="bg-background border-input focus:border-cyan-500 text-foreground"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Tags (comma separated)</label>
+                  <label className="block text-sm font-medium text-foreground mb-2">Tags (comma separated)</label>
                   <Input
                     name="tags"
                     value={formData.tags}
                     onChange={handleChange}
                     placeholder="DevOps, Kubernetes, AWS"
-                    className="bg-slate-900/50 border-slate-600 focus:border-cyan-500 text-white"
+                    className="bg-background border-input focus:border-cyan-500 text-foreground"
                   />
                 </div>
 
@@ -232,9 +233,9 @@ const AdminBlog = () => {
                     name="featured"
                     checked={formData.featured}
                     onChange={handleChange}
-                    className="w-4 h-4 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500"
+                    className="w-4 h-4 rounded border-input text-cyan-500 focus:ring-cyan-500"
                   />
-                  <label htmlFor="featured" className="text-sm text-slate-300">
+                  <label htmlFor="featured" className="text-sm text-foreground">
                     Mark as Featured
                   </label>
                 </div>
@@ -242,12 +243,13 @@ const AdminBlog = () => {
                 <div className="flex space-x-4 pt-4">
                   <Button
                     onClick={handleSave}
-                    className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700"
+                    data-testid="save-post-btn"
+                    className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white"
                   >
                     <Save className="mr-2 h-4 w-4" />
                     Save Post
                   </Button>
-                  <Button variant="outline" onClick={handleCancel} className="border-slate-600">
+                  <Button variant="outline" onClick={handleCancel} data-testid="cancel-post-btn" className="border-border">
                     Cancel
                   </Button>
                 </div>
@@ -257,7 +259,7 @@ const AdminBlog = () => {
             /* Posts List */
             <div className="space-y-4">
               {posts.length === 0 ? (
-                <Card className="bg-slate-800/40 border-slate-700">
+                <Card className="bg-card border-border">
                   <CardContent className="p-12 text-center">
                     <p className="text-muted-foreground mb-4">No blog posts yet.</p>
                     <Button onClick={handleCreate} variant="outline">
@@ -267,25 +269,25 @@ const AdminBlog = () => {
                 </Card>
               ) : (
                 posts.map(post => (
-                  <Card key={post.id} className="bg-slate-800/40 border-slate-700 hover:border-cyan-500/50 transition-all">
+                  <Card key={post.id} data-testid={`admin-post-${post.id}`} className="bg-card border-border hover:border-cyan-500/50 transition-all">
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-2">
-                            <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/50">
+                            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 border-blue-500/50">
                               {post.category}
                             </Badge>
                             {post.featured && (
-                              <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/50">
+                              <Badge className="bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border-cyan-500/50">
                                 Featured
                               </Badge>
                             )}
                           </div>
-                          <h3 className="text-xl font-bold text-white mb-2">{post.title}</h3>
+                          <h3 className="text-xl font-bold text-foreground mb-2">{post.title}</h3>
                           <p className="text-muted-foreground text-sm mb-3 line-clamp-2">{post.excerpt}</p>
                           <div className="flex flex-wrap gap-2">
                             {post.tags.map((tag, index) => (
-                              <Badge key={index} variant="secondary" className="bg-slate-700/50 text-slate-300 text-xs">
+                              <Badge key={index} variant="secondary" className="bg-secondary text-muted-foreground text-xs">
                                 {tag}
                               </Badge>
                             ))}
@@ -296,7 +298,8 @@ const AdminBlog = () => {
                             size="sm"
                             variant="outline"
                             onClick={() => handleEdit(post)}
-                            className="border-slate-600 hover:border-cyan-500/50"
+                            data-testid={`edit-post-${post.id}`}
+                            className="border-border hover:border-cyan-500/50"
                           >
                             <Edit className="h-4 w-4" />
                           </Button>
@@ -304,7 +307,8 @@ const AdminBlog = () => {
                             size="sm"
                             variant="outline"
                             onClick={() => handleDelete(post.id)}
-                            className="border-slate-600 hover:border-red-500/50 hover:text-red-400"
+                            data-testid={`delete-post-${post.id}`}
+                            className="border-border hover:border-red-500/50 hover:text-red-500"
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Download, Linkedin, ExternalLink } from 'lucide-react';
+import { ArrowRight, Download, Linkedin, Github, Instagram, ExternalLink } from 'lucide-react';
 import { Button } from './ui/button';
 import { profileData } from '../mock';
 
@@ -16,14 +16,14 @@ const Hero = () => {
       <div className="container mx-auto px-4 lg:px-8 py-20">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-8 animate-fade-in">
-            <span className="text-cyan-400 text-sm font-medium">13+ Years of DevOps Excellence</span>
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 mb-8 animate-fade-in">
+            <span className="text-cyan-600 dark:text-cyan-400 text-sm font-medium">13+ Years of DevOps Excellence</span>
           </div>
 
           {/* Main Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 animate-slide-up">
             <span className="text-foreground">Hi, I'm </span>
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
               {profileData.name}
             </span>
           </h1>
@@ -44,6 +44,7 @@ const Hero = () => {
             <Button
               size="lg"
               onClick={() => window.open(profileData.linkedin, '_blank')}
+              data-testid="connect-linkedin-btn"
               className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-8 py-6 text-lg rounded-lg shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300 group"
             >
               Connect on LinkedIn
@@ -53,7 +54,8 @@ const Hero = () => {
               size="lg"
               variant="outline"
               onClick={() => window.open(profileData.resumeUrl, '_blank')}
-              className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-500 px-8 py-6 text-lg rounded-lg transition-all duration-300 group"
+              data-testid="download-resume-btn"
+              className="border-cyan-500/50 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-500 px-8 py-6 text-lg rounded-lg transition-all duration-300 group"
             >
               <Download className="mr-2 h-5 w-5 group-hover:translate-y-1 transition-transform" />
               Download Resume
@@ -61,37 +63,56 @@ const Hero = () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center justify-center gap-6 animate-slide-up animation-delay-800">
+          <div className="flex items-center justify-center flex-wrap gap-4 md:gap-6 animate-slide-up animation-delay-800">
             <a
               href={profileData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-cyan-400 transition-colors group"
+              data-testid="hero-linkedin-link"
+              className="flex items-center space-x-2 text-muted-foreground hover:text-cyan-500 transition-colors group"
             >
-              <div className="p-2 rounded-lg bg-slate-800/50 group-hover:bg-cyan-500/10 border border-slate-700 group-hover:border-cyan-500/50 transition-all">
+              <div className="p-2 rounded-lg bg-secondary group-hover:bg-cyan-500/10 border border-border group-hover:border-cyan-500/50 transition-all">
                 <Linkedin className="h-5 w-5" />
               </div>
               <span className="text-sm">LinkedIn</span>
             </a>
             <a
+              href={profileData.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="hero-github-link"
+              className="flex items-center space-x-2 text-muted-foreground hover:text-cyan-500 transition-colors group"
+            >
+              <div className="p-2 rounded-lg bg-secondary group-hover:bg-cyan-500/10 border border-border group-hover:border-cyan-500/50 transition-all">
+                <Github className="h-5 w-5" />
+              </div>
+              <span className="text-sm">GitHub</span>
+            </a>
+            <a
+              href={profileData.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="hero-instagram-link"
+              className="flex items-center space-x-2 text-muted-foreground hover:text-cyan-500 transition-colors group"
+            >
+              <div className="p-2 rounded-lg bg-secondary group-hover:bg-cyan-500/10 border border-border group-hover:border-cyan-500/50 transition-all">
+                <Instagram className="h-5 w-5" />
+              </div>
+              <span className="text-sm">Instagram</span>
+            </a>
+            <a
               href={profileData.medium}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-cyan-400 transition-colors group"
+              data-testid="hero-medium-link"
+              className="flex items-center space-x-2 text-muted-foreground hover:text-cyan-500 transition-colors group"
             >
-              <div className="p-2 rounded-lg bg-slate-800/50 group-hover:bg-cyan-500/10 border border-slate-700 group-hover:border-cyan-500/50 transition-all">
+              <div className="p-2 rounded-lg bg-secondary group-hover:bg-cyan-500/10 border border-border group-hover:border-cyan-500/50 transition-all">
                 <ExternalLink className="h-5 w-5" />
               </div>
               <span className="text-sm">Medium</span>
             </a>
           </div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-cyan-500/50 rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-3 bg-cyan-400 rounded-full animate-scroll"></div>
         </div>
       </div>
     </section>

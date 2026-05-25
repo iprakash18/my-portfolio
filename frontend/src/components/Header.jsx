@@ -61,7 +61,8 @@ const Header = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+            data-testid="header-logo"
+            className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
           >
             {profileData.name.split(' ').map((n, i) => i === 0 ? n[0] : n[0]).join('')}
           </Link>
@@ -73,9 +74,10 @@ const Header = () => {
                 key={item.name}
                 to={item.path}
                 onClick={() => handleNavClick(item.path)}
+                data-testid={`nav-${item.name.toLowerCase()}`}
                 className={`px-3 lg:px-4 py-2 rounded-md text-sm lg:text-base font-medium transition-all duration-200 ${
                   location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path))
-                    ? 'text-cyan-400 bg-cyan-400/10'
+                    ? 'text-cyan-600 dark:text-cyan-400 bg-cyan-500/10'
                     : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                 }`}
               >
@@ -90,6 +92,7 @@ const Header = () => {
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
+              data-testid="theme-toggle-btn"
               className="rounded-full hover:bg-accent transition-colors"
             >
               {theme === 'dark' ? (
@@ -104,6 +107,7 @@ const Header = () => {
               variant="ghost"
               size="icon"
               className="md:hidden"
+              data-testid="mobile-menu-btn"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
@@ -126,7 +130,7 @@ const Header = () => {
                   onClick={() => handleNavClick(item.path)}
                   className={`px-4 py-2 rounded-md text-base font-medium transition-all duration-200 ${
                     location.pathname === item.path
-                      ? 'text-cyan-400 bg-cyan-400/10'
+                      ? 'text-cyan-600 dark:text-cyan-400 bg-cyan-500/10'
                       : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                   }`}
                 >

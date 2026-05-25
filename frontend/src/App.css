@@ -70,22 +70,22 @@ html {
     animation: scroll 2s ease-in-out infinite;
 }
 
-/* Custom scrollbar for dark theme */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #0f172a;
+    background: hsl(var(--background));
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #334155;
+    background: hsl(var(--border));
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #475569;
+    background: hsl(var(--muted-foreground));
 }
 
 /* Smooth transitions for theme switching */
