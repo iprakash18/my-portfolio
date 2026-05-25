@@ -11,6 +11,7 @@ export const profileData = {
   instagram: "https://www.instagram.com/prakashiyyanarappan/",
   medium: "https://medium.com/@iprakash18",
   resumeUrl: "https://customer-assets.emergentagent.com/job_pro-journal-1/artifacts/w3lwk476_Prakash_Iyyanarappan_DevOps.pdf",
+  profileImage: "https://customer-assets.emergentagent.com/job_pro-journal-1/artifacts/xdc9ikvy_Prakash_Original.jpeg",
   summary: "Highly skilled Associate Architect with around 13+ years of expertise in DevOps, specializing in Cloud Infrastructure, CI/CD pipelines, and automation. Proficient in optimizing system performance, enabling seamless deployments, and driving operational efficiency across diverse environments. Strong focus on scalability, reliability, and continuous improvement."
 };
 
@@ -160,6 +161,85 @@ export const education = {
 
 // Mock blog posts
 export const blogPosts = [
+  {
+    id: 5,
+    title: "Simplifying Elasticsearch and Kibana Environment using Docker Compose",
+    excerpt: "Docker Compose is a tool for defining and running multi-container Docker applications. Learn how to create a containerized installation for Elasticsearch and Kibana with a single command.",
+    content: `<p>Docker Compose is a tool for defining and running multi-container (Elasticsearch and Kibana) Docker applications. With Compose, you use a YAML file to configure your application's services. Then with a single command, you create and start all the services from your configuration.</p>
+
+<p>In this section, I will describe how to create a containerized installation for Elasticsearch and Kibana.</p>
+
+<h2>Benefits</h2>
+<ul>
+<li>You describe the multi-container set up in a clear way and bring up the containers in a single command.</li>
+<li>You can define the priority and dependency of the container to other containers.</li>
+</ul>
+
+<h2>Step-by-Step Instruction</h2>
+
+<h3>Step 1: Define services in a Compose file</h3>
+<p>Create a file called <code>docker-compose.yml</code> in your project directory and paste the following:</p>
+
+<pre><code>version: '2.2'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - esnet
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.6.1
+    container_name: kibana
+    environment:
+      - ./kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - "5601:5601"
+    networks:
+      - esnet
+volumes:
+  esdata:
+    driver: local
+networks:
+  esnet:</code></pre>
+
+<p>This Compose file defines two services, Elasticsearch and Kibana.</p>
+
+<h3>Step 2: Basic configurations using kibana.yml</h3>
+<p>Create a file called <code>kibana.yml</code> in your project directory.</p>
+<p><strong>Note:</strong> For more configuration options kindly refer the article <a href="https://www.elastic.co/guide/en/kibana/current/docker.html" target="_blank">kibana.yml</a>.</p>
+
+<h3>Step 3: Build and run your app with docker-compose</h3>
+<p>From your project directory, start up your application by running:</p>
+<pre><code>sudo docker-compose up -d</code></pre>
+
+<p>Compose pulls an Elasticsearch and Kibana images, builds an image for your code, and starts the services you defined.</p>
+
+<p>Elasticsearch is available at <code>http://&lt;hostIP&gt;:9200</code> and Kibana is available at <code>http://&lt;hostIP&gt;:5601</code>.</p>
+
+<h2>Summary</h2>
+<p>Docker Compose is a useful tool to manage container stacks for your client and manage all related containers with one single command.</p>
+
+<p><em>Originally published on <a href="https://medium.com/@iprakash18/elasticsearch-and-kibana-environment-using-docker-compose-58f6d0d4c57f" target="_blank">Medium</a>.</em></p>`,
+    author: "Prakash Iyyanarappan",
+    publishedDate: "2019-03-11",
+    readTime: 2,
+    tags: ["Docker", "Elasticsearch", "Kibana", "ELK", "Docker Compose"],
+    category: "DevOps",
+    featured: true,
+    sourceUrl: "https://medium.com/@iprakash18/elasticsearch-and-kibana-environment-using-docker-compose-58f6d0d4c57f"
+  },
   {
     id: 1,
     title: "Building Scalable CI/CD Pipelines with Jenkins and Kubernetes",

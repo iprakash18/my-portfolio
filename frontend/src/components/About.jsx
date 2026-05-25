@@ -39,12 +39,18 @@ const About = () => {
             {/* Left Column - Image/Visual */}
             <div className="relative">
               <div className="relative z-10">
-                <Card className="bg-card border-border backdrop-blur">
+                <Card className="bg-card border-border backdrop-blur overflow-hidden">
                   <CardContent className="p-8">
                     <div className="space-y-6">
-                      <div className="flex items-center space-x-4">
-                        <div className="h-16 w-16 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 flex items-center justify-center text-2xl font-bold text-white">
-                          {profileData.name.split(' ').map(n => n[0]).join('')}
+                      <div className="flex flex-col items-center text-center space-y-4">
+                        <div className="relative">
+                          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full blur-md opacity-50"></div>
+                          <img
+                            src={profileData.profileImage}
+                            alt={profileData.name}
+                            data-testid="profile-image"
+                            className="relative h-40 w-40 rounded-full object-cover border-4 border-cyan-500/50 shadow-xl shadow-cyan-500/20"
+                          />
                         </div>
                         <div>
                           <h3 className="text-xl font-bold text-foreground">{profileData.name}</h3>

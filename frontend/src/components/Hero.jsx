@@ -15,11 +15,6 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 lg:px-8 py-20">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 mb-8 animate-fade-in">
-            <span className="text-cyan-600 dark:text-cyan-400 text-sm font-medium">13+ Years of DevOps Excellence</span>
-          </div>
-
           {/* Main Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 animate-slide-up">
             <span className="text-foreground">Hi, I'm </span>
