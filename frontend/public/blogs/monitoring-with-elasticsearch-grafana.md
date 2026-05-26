@@ -234,24 +234,3 @@ grafana:
 ```
 
 Access Grafana UI from port **3000**. The default user is `admin` and the password you set in the compose file.
-
-## Setting up Skedler Reports
-
-Finally, set up Skedler Reports using Grafana as a data source:
-
-```yaml
-reports:
-  image: skedler/reports:latest
-  container_name: reports
-  privileged: true
-  cap_add:
-    - SYS_ADMIN
-  volumes:
-    - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    - reportdata:/var/lib/skedler
-    - ./reporting.yml:/opt/skedler/config/reporting.yml
-  ports:
-    - 3001:3001
-```
-
-Access Skedler Reports from the URL: `http://IP_Address:3001`
