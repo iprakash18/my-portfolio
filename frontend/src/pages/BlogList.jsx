@@ -1,35 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Clock, Tag, ArrowRight, Search } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, Search } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
-import { blogPosts } from '../mock';
+import { loadAllPosts } from '../lib/blogs';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const BlogList = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  // Get unique categories
-  const categories = ['All', ...new Set(blogPosts.map(post => post.category))];
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    loadAllPosts()
+      .then(p => { if (!cancelled) { setPosts(p); setLoading(false); } })
+      .catch(err => { if (!cancelled) { setError(err.message); setLoading(false); } });
+    return () => { cancelled = true; };
+  }, []);
 
-  // Filter posts
-  const filteredPosts = blogPosts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+  const categories = ['All', ...new Set(posts.map(p => p.category).filter(Boolean))];
+
+  const filteredPosts = posts.filter(post => {
+    const matchesSearch =
+      (post.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (post.excerpt || '').toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
     return matchesSearch && matchesCategory;
-  });
-
-  // Show all posts in a single grid; featured posts appear first
-  const sortedPosts = [...filteredPosts].sort((a, b) => {
-    if (a.featured === b.featured) {
-      return new Date(b.publishedDate) - new Date(a.publishedDate);
-    }
-    return a.featured ? -1 : 1;
   });
 
   return (
@@ -66,26 +69,28 @@ const BlogList = () => {
         </section>
 
         {/* Categories */}
-        <section className="py-8 border-b border-border">
-          <div className="container mx-auto px-4 lg:px-8">
-            <div className="flex flex-wrap justify-center gap-3">
-              {categories.map(category => (
-                <Button
-                  key={category}
-                  variant={selectedCategory === category ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory(category)}
-                  data-testid={`category-${category.toLowerCase().replace(/\s+/g, '-')}`}
-                  className={selectedCategory === category
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white'
-                    : 'border-border text-muted-foreground hover:border-cyan-500/50 hover:text-cyan-500'
-                  }
-                >
-                  {category}
-                </Button>
-              ))}
+        {!loading && posts.length > 0 && (
+          <section className="py-8 border-b border-border">
+            <div className="container mx-auto px-4 lg:px-8">
+              <div className="flex flex-wrap justify-center gap-3">
+                {categories.map(category => (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? 'default' : 'outline'}
+                    onClick={() => setSelectedCategory(category)}
+                    data-testid={`category-${category.toLowerCase().replace(/\s+/g, '-')}`}
+                    className={selectedCategory === category
+                      ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white'
+                      : 'border-border text-muted-foreground hover:border-cyan-500/50 hover:text-cyan-500'
+                    }
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* All Posts */}
         <section className="py-12 lg:py-16">
@@ -93,26 +98,37 @@ const BlogList = () => {
             <h2 className="text-2xl lg:text-3xl font-bold mb-8">
               {selectedCategory === 'All' ? 'All Articles' : `${selectedCategory} Articles`}
             </h2>
-            {sortedPosts.length > 0 ? (
+
+            {loading ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">Loading articles...</p>
+              </div>
+            ) : error ? (
+              <div className="text-center py-12">
+                <p className="text-red-500">Failed to load articles: {error}</p>
+              </div>
+            ) : filteredPosts.length > 0 ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {sortedPosts.map(post => (
+                {filteredPosts.map(post => (
                   <Card
-                    key={post.id}
-                    data-testid={`blog-post-${post.id}`}
+                    key={post.slug}
+                    data-testid={`blog-post-${post.slug}`}
                     className="bg-card border-border hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 group hover:-translate-y-1"
                   >
                     <CardContent className="p-6">
                       <div className="flex items-center gap-2 mb-3 flex-wrap">
-                        <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 border-blue-500/50">
-                          {post.category}
-                        </Badge>
+                        {post.category && (
+                          <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 border-blue-500/50">
+                            {post.category}
+                          </Badge>
+                        )}
                         {post.featured && (
                           <Badge className="bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border-cyan-500/50">
                             Featured
                           </Badge>
                         )}
                       </div>
-                      <Link to={`/blog/${post.id}`}>
+                      <Link to={`/blog/${post.slug}`}>
                         <h3 className="text-xl font-bold text-foreground group-hover:text-cyan-500 transition-colors mb-3 line-clamp-2">
                           {post.title}
                         </h3>
@@ -122,17 +138,21 @@ const BlogList = () => {
                       </p>
 
                       <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
-                        <div className="flex items-center space-x-1">
-                          <Calendar className="h-3 w-3" />
-                          <span>{new Date(post.publishedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <Clock className="h-3 w-3" />
-                          <span>{post.readTime} min</span>
-                        </div>
+                        {post.publishedDate && (
+                          <div className="flex items-center space-x-1">
+                            <Calendar className="h-3 w-3" />
+                            <span>{new Date(post.publishedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                          </div>
+                        )}
+                        {post.readTime && (
+                          <div className="flex items-center space-x-1">
+                            <Clock className="h-3 w-3" />
+                            <span>{post.readTime} min</span>
+                          </div>
+                        )}
                       </div>
 
-                      <Link to={`/blog/${post.id}`}>
+                      <Link to={`/blog/${post.slug}`}>
                         <Button variant="ghost" className="text-cyan-500 hover:text-cyan-600 p-0 h-auto text-sm group/btn">
                           Read Article
                           <ArrowRight className="ml-1 h-3 w-3 group-hover/btn:translate-x-1 transition-transform" />

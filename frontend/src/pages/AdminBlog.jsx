@@ -7,7 +7,7 @@ import { Textarea } from '../components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { useToast } from '../hooks/use-toast';
-import { blogPosts as initialPosts } from '../mock';
+import { blogPosts as initialPosts } from '../mock_admin_stub';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 

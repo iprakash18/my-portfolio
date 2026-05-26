@@ -1,0 +1,9 @@
+{
+  "posts": [
+    "docker-compose-elk",
+    "ci-cd-jenkins-kubernetes",
+    "terraform-aws-best-practices",
+    "devsecops-shifting-left",
+    "kubernetes-production-best-practices"
+  ]
+}
