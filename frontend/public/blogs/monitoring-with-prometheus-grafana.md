@@ -221,24 +221,3 @@ grafana:
 ```
 
 Access Grafana UI from port **3000**. The default user is `admin` and the password is what you set in the compose file.
-
-## Setting up Skedler Reports
-
-Now we will set up Skedler Reports, where we will be using Grafana as a data source. Skedler offers a simple and easy to add reporting and alerting solution for Elastic Stack and Grafana.
-
-```yaml
-reports:
-  image: skedler/reports:latest
-  container_name: reports
-  privileged: true
-  cap_add:
-    - SYS_ADMIN
-  volumes:
-    - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    - reportdata:/var/lib/skedler
-    - ./reporting.yml:/opt/skedler/config/reporting.yml
-  ports:
-    - 3001:3001
-```
-
-Access Skedler Reports from the URL: `http://IP_Address:3001`
