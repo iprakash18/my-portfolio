@@ -10,7 +10,7 @@ featured: true
 sourceUrl: https://medium.com/skedler/monitoring-servers-and-docker-containers-using-prometheus-with-grafana-87cf961fe1e0
 ---
 
-![Prometheus + Grafana Monitoring Stack](https://miro.medium.com/v2/resize:fit:700/1*IA_vXX4ndCVISMIQXMZnUw.png)
+![Prometheus + Grafana Monitoring Stack](../blogs/images/prometheus-docker-grafana.png)
 
 ## Introduction
 
