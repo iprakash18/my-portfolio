@@ -10,7 +10,7 @@ featured: true
 sourceUrl: https://medium.com/skedler/monitoring-servers-and-docker-containers-using-elasticsearch-with-grafana-c61dab0a34a2
 ---
 
-![Elasticsearch + Grafana Monitoring](/images/elk.png)
+![Elasticsearch + Grafana Monitoring](../images/elk.png)
 
 ## Introduction
 
