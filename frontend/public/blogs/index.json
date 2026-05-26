@@ -1,9 +1,9 @@
 {
   "posts": [
-    "docker-compose-elk",
-    "ci-cd-jenkins-kubernetes",
-    "terraform-aws-best-practices",
-    "devsecops-shifting-left",
-    "kubernetes-production-best-practices"
+    "monitoring-with-prometheus-grafana",
+    "monitoring-with-elasticsearch-grafana",
+    "sonobuoy-kubernetes-validation",
+    "loading-data-into-bigquery",
+    "docker-compose-elk"
   ]
 }
